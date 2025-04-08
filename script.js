@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', getRickAndMortyCharacters);
-
+        
 function getRickAndMortyCharacters() {
     const apiUrl = 'https://rickandmortyapi.com/api/character/';
-
+    
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
@@ -11,21 +11,24 @@ function getRickAndMortyCharacters() {
         .catch(error => console.error('Ha ocurrido un error:', error));
 }
 
-
 function mostrarPersonajes(personajes) {
     if (Array.isArray(personajes)) {
-        const resultadoDiv = document.getElementById("personajes"); // Cambiamos el ID del contenedor
+        const resultadoDiv = document.getElementById("personajes");
+        resultadoDiv.innerHTML = ''; // Clear loading message
+        
         personajes.forEach(personaje => {
-            const card = document.createElement("div"); // Usamos un div para la card
-            card.classList.add("card"); // Agregamos la clase "card"
+            const card = document.createElement("div");
+            card.classList.add("card");
+            
             const img = document.createElement("img");
             img.src = personaje.image;
             img.alt = personaje.name;
             card.appendChild(img);
-
-            const content = document.createElement("h1"); // Div para el contenido de la card
-            content.textContent = `${personaje.name} `;
+            
+            const content = document.createElement("h1");
+            content.textContent = personaje.name;
             card.appendChild(content);
+            
             resultadoDiv.appendChild(card);
         });
     } else {
